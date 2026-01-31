@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Google Sans", sans-serif;
+  color: #212329;
+}
+
+button {
+  cursor: pointer;
+}
+
+@layer {
+  .input {
+    @apply w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply w-full inline-flex items-center justify-center gap-2 py-2.5 px-6 rounded-full bg-indigo-600 text-white text-lg font-semibold hover:bg-indigo-700 transition-all duration-500 disabled:opacity-50;
+  }
+}
