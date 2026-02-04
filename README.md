@@ -92,9 +92,9 @@ This prevents:
 - Automatic access token refresh
 - Automatic CSRF regeneration
 - Request retry queue handling
-- Race-condition safe logic
-
-
+- Loading states & skeletons
+- Debounced username availability check
+- Stale-while-revalidate caching strategy for auth user
 ---
 
 ## 🧩 Feature Breakdown
@@ -148,30 +148,11 @@ This prevents:
 
 Email enumeration is prevented by returning a generic response.
 
----
+### ✅ Frontend Caching
 
-## 🧱 Tech Stack
-
-### Backend
-- Node.js
-- Express.js
-- MongoDB
-- Redis
-- JWT
-- bcrypt
-- Nodemailer
-- Helmet
-- Rate limiting
-- CSRF protection
-
-### Frontend
-- React
-- React Router
-- Axios
-- Tailwind CSS
-- Context API
-- Debouncing
-- Toast notifications
+- User Stale-while-revalidate strategy to cache user data
+- Data displayed immediately on page load, then revalidated in the background
+- Ensures the UI always shows fresh user info without flicker
 
 ---
 
@@ -232,6 +213,8 @@ This allows:
 - Stored in Redis with TTL
 - Auto-reset after expiration
 
+---
+
 ## 🧼 Input Sanitization
 
 To prevent NoSQL Injection attacks, all incoming request data is sanitized before validation.
@@ -243,6 +226,8 @@ To prevent NoSQL Injection attacks, all incoming request data is sanitized befor
 
 This ensures that malicious payloads cannot reach MongoDB queries.
 
+---
+
 ## 🌐 CORS Configuration
 
 Cross-Origin Resource Sharing (CORS) is strictly configured to allow only trusted clients.
@@ -252,6 +237,32 @@ Cross-Origin Resource Sharing (CORS) is strictly configured to allow only truste
 - Allows secure cookie-based authentication
 - Required for HTTP-only cookies
 - Supports cross-domain auth safely
+
+---
+## 🧱 Tech Stack
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Redis
+- JWT
+- bcrypt
+- Nodemailer
+- Helmet
+- Rate limiting
+- CSRF protection
+
+### Frontend
+- React
+- React Router
+- Axios
+- Tailwind CSS
+- Context API
+- Debouncing
+- Toast notifications
+
+---
 
 ## 📌 Why This Project Matters
 
