@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { User } from "../models/user.model.js";
 import {
   generateAccessToken,
@@ -50,7 +51,7 @@ const registerUser = async (req, res) => {
       html: getVerifyEmailHtml({ email, token: verifyToken }),
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       message:
         "If your email is valid, a verification link has been sent. It will expire in 5 minute.",
     });
@@ -70,7 +71,12 @@ const verifyUser = async (req, res) => {
         .json({ message: "Verification token is required." });
     }
 
-    const verifyKey = `verify:${token}`;
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(token)
+      .digest("hex");
+
+    const verifyKey = `verify:${hashedToken}`;
 
     const userDataJson = await redisClient.get(verifyKey);
 
@@ -79,8 +85,6 @@ const verifyUser = async (req, res) => {
         message: "Verification link is expired.",
       });
     }
-
-    // await redisClient.del(verifyKey);
 
     const userData = JSON.parse(userDataJson);
 
