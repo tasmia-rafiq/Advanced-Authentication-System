@@ -1,9 +1,17 @@
-import React from 'react'
-
 const Loading = () => {
   return (
-    <div className='w-25 m-auto mt-40'>Loading....</div>
-  )
-}
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white">
+      <div className="flex items-center gap-3">
+        <div className="w-3 h-3 bg-indigo-600 rounded-full animate-bounce [animation-delay:-0.3s]" />
+        <div className="w-3 h-3 bg-indigo-600 rounded-full animate-bounce [animation-delay:-0.15s]" />
+        <div className="w-3 h-3 bg-indigo-600 rounded-full animate-bounce" />
+      </div>
 
-export default Loading
+      <p className="mt-5 text-sm font-medium text-slate-500">
+        Please wait…
+      </p>
+    </div>
+  );
+};
+
+export default Loading;
